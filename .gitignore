@@ -1,0 +1,23 @@
+# Build output
+bin/
+obj/
+dist-single/
+publish/
+*.user
+*.suo
+
+# The published single-file exe belongs to GitHub Releases, not to git history
+dist/
+
+# IDE
+.vs/
+.idea/
+*.DotSettings.user
+
+# Test and coverage output
+TestResults/
+coverage*.xml
+
+# Local tooling
+artifacts/
+*.log

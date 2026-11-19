@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>DesktopOrbit.Shell</RootNamespace>
+    <AssemblyName>DesktopOrbit.Shell</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DesktopOrbit.Core\DesktopOrbit.Core.csproj" />
+  </ItemGroup>
+
+</Project>

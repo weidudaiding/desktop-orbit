@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>DesktopOrbit.App</RootNamespace>
+    <AssemblyName>DesktopOrbit</AssemblyName>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>orbit.ico</ApplicationIcon>
+    <Version>0.3.0</Version>
+    <Authors>DesktopOrbit</Authors>
+    <Product>Desktop Orbit</Product>
+    <AssemblyTitle>Desktop Orbit</AssemblyTitle>
+    <Description>桌面环形快捷菜单</Description>
+    <Company>DesktopOrbit</Company>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DesktopOrbit.Core\DesktopOrbit.Core.csproj" />
+    <ProjectReference Include="..\DesktopOrbit.Shell\DesktopOrbit.Shell.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="orbit.ico" />
+  </ItemGroup>
+
+</Project>

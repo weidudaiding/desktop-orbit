@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Desktop Orbit configuration",
+  "type": "object",
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "general": {
+      "type": "object",
+      "properties": {
+        "startWithWindows": { "type": "boolean" },
+        "language": { "type": "string" },
+        "pauseWhenFullscreen": { "type": "boolean", "description": "全屏游戏/演示时抑制触发" },
+        "vaultPath": { "type": "string", "description": "收纳目录，用于把桌面项目移出桌面" },
+        "showHiddenItems": { "type": "boolean" },
+        "thumbnails": { "type": "boolean", "description": "为图片/视频请求缩略图而非图标" },
+        "firstRunCompleted": { "type": "boolean" }
+      }
+    },
+    "trigger": {
+      "type": "object",
+      "properties": {
+        "hotkeyEnabled": { "type": "boolean" },
+        "hotkey": { "type": "string", "pattern": "^(Alt|Ctrl|Control|Shift|Win|Meta)(\\+(Alt|Ctrl|Control|Shift|Win|Meta))*\\+[^+]+$", "examples": ["Ctrl+Alt+Space"] },
+        "longPressEnabled": { "type": "boolean" },
+        "middleClickOnDesktop": { "type": "boolean" },
+        "strictSwallowClick": { "type": "boolean", "description": "保留位：吞掉触发的那次点击需要全局钩子，默认关闭" },
+        "longPress": {
+          "type": "object",
+          "properties": {
+            "holdMs": { "type": "integer", "minimum": 120, "maximum": 3000 },
+            "moveSlopPx": { "type": "integer", "minimum": 2, "maximum": 60 },
+            "requireBlankSpot": { "type": "boolean", "description": "仅桌面空白处触发；失败时自动降级" },
+            "onlyWhenDesktopForeground": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "menu": {
+      "type": "object",
+      "properties": {
+        "outerRadiusDip": { "type": "number", "minimum": 80, "maximum": 600 },
+        "hubRadiusRatio": { "type": "number", "minimum": 0.15, "maximum": 0.6 },
+        "sectorGapDeg": { "type": "number", "minimum": 0, "maximum": 20 },
+        "openAnimationMs": { "type": "integer", "minimum": 0 },
+        "hoverDelayMs": { "type": "integer", "minimum": 0, "description": "悬停多少毫秒后下钻" },
+        "hoverExpandPx": { "type": "number", "minimum": 0, "maximum": 40 },
+        "maxSectors": { "type": "integer", "minimum": 2, "maximum": 24, "description": "单环最多扇区，超出折叠为「+N」翻页" },
+        "idleTimeoutMs": { "type": "integer", "minimum": 0, "description": "指针停在圆盘上多久无操作后关闭，0 表示关闭该行为" },
+        "shadowMarginDip": { "type": "number", "minimum": 0 },
+        "showLabels": { "type": "boolean" },
+        "labelMaxChars": { "type": "integer", "minimum": 3, "maximum": 24 },
+        "maxItemsPerFolder": { "type": "integer", "minimum": 1 },
+        "dismiss": {
+          "type": "object",
+          "description": "关闭行为。两种模式可同时开启。",
+          "properties": {
+            "closeOnClickOutside": { "type": "boolean", "description": "点击圆盘以外的任何位置立即关闭" },
+            "closeOnPointerLeave": { "type": "boolean", "description": "指针离开后自动关闭" },
+            "pointerLeaveDelayMs": { "type": "integer", "minimum": 0, "maximum": 3000, "description": "移出死区时间" },
+            "pointerLeaveBufferDip": { "type": "number", "minimum": 0, "maximum": 200, "description": "扩大判定范围的边缘缓冲" },
+            "closeOnFocusLoss": { "type": "boolean" },
+            "closeOnEscape": { "type": "boolean" }
+          }
+        },
+        "drill": {
+          "type": "object",
+          "description": "进入子文件夹的方式。",
+          "properties": {
+            "onClick": { "type": "boolean", "description": "单击扇区进入" },
+            "onHover": { "type": "boolean", "description": "悬停 hoverDelayMs 后进入" },
+            "rightClickGoesBack": { "type": "boolean" },
+            "escapeGoesBack": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "appearance": {
+      "type": "object",
+      "properties": {
+        "backgroundColor": { "type": "string" },
+        "surfaceColor": { "type": "string" },
+        "accentColor": { "type": "string" },
+        "accentColor2": { "type": "string" },
+        "textColor": { "type": "string" },
+        "mutedTextColor": { "type": "string" },
+        "backgroundOpacity": { "type": "number", "minimum": 0.2, "maximum": 1 },
+        "iconSizeDip": { "type": "number", "minimum": 16, "maximum": 96 },
+        "fontFamily": { "type": "string" },
+        "animations": { "type": "boolean" },
+        "glow": { "type": "boolean" }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "enum": ["desktop", "folder", "recent"] },
+          "path": { "type": "string", "description": "支持 %USERPROFILE% 等环境变量" },
+          "label": { "type": "string" },
+          "icon": { "type": "string" },
+          "enabled": { "type": "boolean" }
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "sectors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "sourceId": { "type": "string" },
+              "path": { "type": "string" },
+              "label": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "search": {
+      "type": "object",
+      "properties": {
+        "maxResults": { "type": "integer", "minimum": 1 },
+        "includeSubfolders": { "type": "boolean" },
+        "maxDepth": { "type": "integer", "minimum": 1, "maximum": 8 },
+        "maxIndexEntries": { "type": "integer", "minimum": 1000 }
+      }
+    },
+    "actions": {
+      "type": "object",
+      "properties": {
+        "dragEnabled": { "type": "boolean" },
+        "confirmAdminOpen": { "type": "boolean" },
+        "showRecentInHub": { "type": "boolean" }
+      }
+    }
+  }
+}
