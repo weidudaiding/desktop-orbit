@@ -37,6 +37,10 @@
 | **多屏与高 DPI** | Per-Monitor V2，按光标所在屏定位，异分辨率下不被裁切 |
 | **轻量常驻** | 托盘图标，单实例，空闲 CPU 接近 0 |
 
+<p align="center">
+  <img src="docs/images/search.png" width="440" alt="搜索：卡片抬头显示查询词与命中数">
+</p>
+
 ## 快速开始
 
 ### 直接使用
